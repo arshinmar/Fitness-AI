@@ -4,6 +4,7 @@ import time
 
 import cv2
 import numpy as np
+import timeit
 
 from tf_pose.estimator import TfPoseEstimator
 from tf_pose.networks import get_graph_path, model_wh
@@ -38,7 +39,7 @@ if __name__ == '__main__':
     parser.add_argument('--model', type=str, default='mobilenet_thin', help='cmu / mobilenet_thin / mobilenet_v2_large / mobilenet_v2_small')
     parser.add_argument('--show-process', type=bool, default=False,
                         help='for debug purpose, if enabled, speed for inference is dropped.')
-    
+
     parser.add_argument('--tensorrt', type=str, default="False",
                         help='for tensorrt process.')
     args = parser.parse_args()
@@ -55,7 +56,12 @@ if __name__ == '__main__':
     logger.info('cam image=%dx%d' % (image.shape[1], image.shape[0]))
     counter=0
     test=0
-    while True or counter<=100:
+    lock=0
+    check=False
+    while True:
+        if lock==0:
+            start=timeit.timeit()
+            lock=1
         ret_val, image = cam.read()
 
         #logger.debug('image process+')
@@ -63,6 +69,8 @@ if __name__ == '__main__':
         image = TfPoseEstimator.draw_humans(image, humans, imgcopy=False)
         height,width=image.shape[:2]
         test=TfPoseEstimator.determine_correct_squat_form(humans,height,width)
+        if TfPoseEstimator.check_for_butt_above(humans,height,width)==False:
+            check=False
 
         #logger.debug('postprocess+')
 
@@ -78,4 +86,11 @@ if __name__ == '__main__':
             break
         logger.debug('finished+')
         counter+=1
+        end=timeit.timeit()
+        if (end-start)>=5:
+            if check==False:
+                print('Your butt is not low enough!')
+            else:
+                check=False
+                lock=0
     cv2.destroyAllWindows()

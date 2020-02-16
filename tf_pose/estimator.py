@@ -448,6 +448,40 @@ class TfPoseEstimator:
                 cv2.line(npimg, centers[pair[0]], centers[pair[1]], common.CocoColors[pair_order], 3)
 
         return npimg
+    def check_for_butt_above(humans,image_h,image_w):
+        right_hip_x = 0
+        right_hip_y = 0
+        left_hip_x = 0
+        left_hip_y = 0
+
+        right_knee_x = 0
+        right_knee_y = 0
+        left_knee_x = 0
+        left_knee_y = 0
+
+        for human in humans:
+            # draw point
+            for i in range(common.CocoPart.Background.value):
+                if i not in human.body_parts.keys():
+                    continue
+
+                body_part=human.body_parts[i]
+                if i==8:
+                    right_hip_x = int(body_part.x * image_w + 0.5)
+                    right_hip_y = int(body_part.y * image_h + 0.5)
+                elif i==9:
+                    right_knee_x = int(body_part.x * image_w + 0.5)
+                    right_knee_y = int(body_part.y * image_h + 0.5)
+                elif i==11:
+                    left_hip_x = int(body_part.x * image_w + 0.5)
+                    left_hip_y = int(body_part.y * image_h + 0.5)
+                elif i==12:
+                    left_knee_x = int(body_part.x * image_w + 0.5)
+                    left_knee_y = int(body_part.y * image_h + 0.5)
+            if left_hip_y>left_knee_y or right_knee_x>right_knee_y:
+                return True
+            else:
+                return False
 
     def determine_correct_squat_form(humans,image_h,image_w):
         right_knee_x = 0
