@@ -8,6 +8,9 @@ import numpy as np
 from tf_pose.estimator import TfPoseEstimator
 from tf_pose.networks import get_graph_path, model_wh
 
+from tf_pose import common
+from tf_pose.common import CocoPart
+
 
 logger = logging.getLogger('TfPoseEstimator-WebCam')
 logger.setLevel(logging.DEBUG)
@@ -51,16 +54,18 @@ if __name__ == '__main__':
     ret_val, image = cam.read()
     logger.info('cam image=%dx%d' % (image.shape[1], image.shape[0]))
     counter=0
+    test=0
     while True or counter<=100:
         ret_val, image = cam.read()
 
-        logger.debug('image process+')
+        #logger.debug('image process+')
         humans = e.inference(image, resize_to_default=(w > 0 and h > 0), upsample_size=args.resize_out_ratio)
-        for human in humans:
-            print('Human',human)
-
-        logger.debug('postprocess+')
         image = TfPoseEstimator.draw_humans(image, humans, imgcopy=False)
+        height,width=image.shape[:2]
+        test=TfPoseEstimator.determine_correct_squat_form(humans,height,width)
+
+        #logger.debug('postprocess+')
+
         #print('image',image)
         logger.debug('show+')
         cv2.putText(image,

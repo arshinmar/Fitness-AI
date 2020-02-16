@@ -426,28 +426,93 @@ class TfPoseEstimator:
                 #    continue
 
                 body_part = human.body_parts[i]
-                if i==3:
-                    left_elbow_x = int(body_part.x * image_w + 0.5)
-                    left_elbow_y = int(body_part.y * image_h + 0.5)
-                elif i==6:
-                    right_elbow_x = int(body_part.x * image_w + 0.5)
-                    right_elbow_y = int(body_part.y * image_h + 0.5)
+                #if i==3:
+                #    left_elbow_x = int(body_part.x * image_w + 0.5)
+                #    left_elbow_y = int(body_part.y * image_h + 0.5)
+                #elif i==6:
+                #    right_elbow_x = int(body_part.x * image_w + 0.5)
+                #    right_elbow_y = int(body_part.y * image_h + 0.5)
                 center = (int(body_part.x * image_w + 0.5), int(body_part.y * image_h + 0.5))
                 centers[i] = center
                 cv2.circle(npimg, center, 3, common.CocoColors[i], thickness=3, lineType=8, shift=0)
-            if left_elbow_y>right_elbow_y:
-                print('Left Elbow Higher')
+            #if left_elbow_y>right_elbow_y:
+            #    print('Left Elbow Higher')
             #print("Left Shoulder: x=",int(shoulder.x))
             #print("Left Shoulder: y=", int(shoulder.y))
             # draw line
-            '''for pair_order, pair in enumerate(common.CocoPairsRender):
+            for pair_order, pair in enumerate(common.CocoPairsRender):
                 if pair[0] not in human.body_parts.keys() or pair[1] not in human.body_parts.keys():
                     continue
 
                 # npimg = cv2.line(npimg, centers[pair[0]], centers[pair[1]], common.CocoColors[pair_order], 3)
                 cv2.line(npimg, centers[pair[0]], centers[pair[1]], common.CocoColors[pair_order], 3)
-            '''
+
         return npimg
+
+    def determine_correct_squat_form(humans,image_h,image_w):
+        right_knee_x = 0
+        right_knee_y = 0
+        left_knee_x = 0
+        left_knee_y = 0
+
+        right_ankle_x = 0
+        right_ankle_y = 0
+        left_ankle_x = 0
+        left_ankle_y = 0
+
+        right_hip_x = 0
+        right_hip_y = 0
+        left_hip_x = 0
+        left_hip_y = 0
+
+        right_shoulder_x = 0
+        right_shoulder_y = 0
+        left_shoulder_x = 0
+        left_shoulder_y = 0
+        for human in humans:
+            # draw point
+            for i in range(common.CocoPart.Background.value):
+                if i not in human.body_parts.keys():
+                    continue
+                # if i not in dict1:
+                # print (i)
+                #    continue
+
+                body_part = human.body_parts[i]
+                if i == 2:
+                    right_shoulder_x = int(body_part.x * image_w + 0.5)
+                    right_shoulder_y = int(body_part.y * image_h + 0.5)
+                elif i == 5:
+                    left_shoulder_x = int(body_part.x * image_w + 0.5)
+                    left_shoulder_y = int(body_part.y * image_h + 0.5)
+                elif i == 8:
+                    right_hip_x = int(body_part.x * image_w + 0.5)
+                    right_hip_y = int(body_part.y * image_h + 0.5)
+                elif i == 9:
+                    right_knee_x = int(body_part.x * image_w + 0.5)
+                    right_knee_y = int(body_part.y * image_h + 0.5)
+                elif i == 10:
+                    right_ankle_x = int(body_part.x * image_w + 0.5)
+                    right_ankle_y = int(body_part.y * image_h + 0.5)
+                elif i == 11:
+                    left_hip_x = int(body_part.x * image_w + 0.5)
+                    left_hip_y = int(body_part.y * image_h + 0.5)
+                elif i == 12:
+                    left_knee_x = int(body_part.x * image_w + 0.5)
+                    left_knee_y = int(body_part.y * image_h + 0.5)
+                elif i == 13:
+                    left_ankle_x = int(body_part.x * image_w + 0.5)
+                    left_ankle_y = int(body_part.y * image_h + 0.5)
+            if left_knee_x < left_ankle_x:
+                print('Left knee too far forward')
+            if right_knee_x < right_ankle_x:
+                print('Right knee too far forward')
+            if left_shoulder_x < left_knee_x:
+                print('Left shoulder too far forward')
+            if right_shoulder_x < right_knee_x:
+                print('Right shoulder too far forward')
+
+        return 0
 
     def _get_scaled_img(self, npimg, scale):
         get_base_scale = lambda s, w, h: max(self.target_size[0] / float(h), self.target_size[1] / float(w)) * s
