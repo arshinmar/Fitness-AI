@@ -17,4 +17,3 @@ def heart_rate_outlier_detection(age,heart_rate):
     else:
         return 0
     #Output Format: 2 for OverWorked, 1 for Decent Work, 0 for Underworked
-    
