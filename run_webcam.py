@@ -50,16 +50,18 @@ if __name__ == '__main__':
     cam = cv2.VideoCapture(args.camera)
     ret_val, image = cam.read()
     logger.info('cam image=%dx%d' % (image.shape[1], image.shape[0]))
-
-    while True:
+    counter=0
+    while True or counter<=100:
         ret_val, image = cam.read()
 
         logger.debug('image process+')
         humans = e.inference(image, resize_to_default=(w > 0 and h > 0), upsample_size=args.resize_out_ratio)
+        for human in humans:
+            print('Human',human)
 
         logger.debug('postprocess+')
         image = TfPoseEstimator.draw_humans(image, humans, imgcopy=False)
-
+        #print('image',image)
         logger.debug('show+')
         cv2.putText(image,
                     "FPS: %f" % (1.0 / (time.time() - fps_time)),
@@ -70,5 +72,5 @@ if __name__ == '__main__':
         if cv2.waitKey(1) == 27:
             break
         logger.debug('finished+')
-
+        counter+=1
     cv2.destroyAllWindows()
