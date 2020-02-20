@@ -1,6 +1,9 @@
 # Fitness Buddy (FitBud) 
-![Screenshot](https://imgur.com/6k5KB57)
-This repository was created for the MakeUofT hackathon on February 15-16, 2020. 
+
+<img src="https://i.imgur.com/6k5KB57.png)" width="400" height="300"/>
+
+
+This repository was created as part of our submission for the MakeUofT 2020 hackathon.
 
 ### Team
 
