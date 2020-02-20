@@ -44,7 +44,7 @@ We used a pretrained implementation of CMU Posenet in Tensorflow (link) for pose
 
 ### What We Learned
 
-• How to use many different hardware products and techniques, including a bluetooth module, haptic motors and controllers, and a Raspberry • Pi (which we did not use in our final design). We also improved our Arduino and circuit skills.
+• How to use many different hardware products and techniques, including a bluetooth module, haptic motors and controllers, and a Raspberry Pi (which we did not use in our final design). 
 • The efficiency and output derivation of many different machine learning models.
 • The importance of prototyping physical systems that people will interact with and could break.
 • A greater sense of focus towards better wellbeing of individual people through exercise.
