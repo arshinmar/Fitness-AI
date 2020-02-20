@@ -11,7 +11,7 @@ The team consists of Arsh Kadakia, Sepehr Hosseini, Ben Natra and Nicola Lawford
 
 ### Result
 
-This submission received a top 5 placement at the hackathon amongst a pool of 240 participants from universities all across Canada.
+This submission received a Top-5 placement at the hackathon amongst a pool of 240 participants from universities all across Canada.
 
 ### Inspiration:
 
@@ -30,6 +30,10 @@ When a user works out at home, they can place their laptop camera and display at
 ### How We Built It
 
 We used a pretrained implementation of CMU Posenet in Tensorflow (link) for pose estimation. We analyzed coordinates of joints in the image using our own Python functions based on expert knowledge of workout form. The vision processing feedback outputs from the laptop are interfaced to an Arduino Uno over Bluetooth connection, and the Uno controls a Grove haptic motor.
+
+### Method of Use
+
+Run the run_webcam.py file, ideally with a haptic motor connected to the computer.
 
 ### Challenges We Ran Into
 
