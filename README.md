@@ -1,5 +1,5 @@
 # Fitness Buddy (FitBud) 
-! [Screenshot] (Screenshot 2020-02-17 at 5.30.43 PM.png)
+![Screenshot](https://imgur.com/6k5KB57)
 This repository was created for the MakeUofT hackathon on February 15-16, 2020. 
 
 ### Team
