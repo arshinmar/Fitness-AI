@@ -38,22 +38,31 @@ We used a pretrained implementation of CMU Posenet in Tensorflow (link) for pose
 ### Accomplishments that We're Proud of
 
 • Integrating Python and Arduino using a Bluetooth module to achieve haptic feedback.
+
 • Labelling joints and poses for analysis through appropriate machine learning models.
+
 • Adding analysis to machine learning outputs to make them useful in a real life context.
+
 • Learning to use different languages and products (including Raspberry Pi) to perform specific technical tasks.
 
 ### What We Learned
 
 • How to use many different hardware products and techniques, including a bluetooth module, haptic motors and controllers, and a Raspberry Pi (which we did not use in our final design). 
+
 • The efficiency and output derivation of many different machine learning models.
+
 • The importance of prototyping physical systems that people will interact with and could break.
+
 • A greater sense of focus towards better wellbeing of individual people through exercise.
 
 ### What's Next for Fitness Buddy: Haptic Feedback on Exercise Form:
 
 • Incorporate and add software for a variety of different exercises.
+
 • Migrate to Raspberry Pi for a more portable experience.
+
 • Integrate with Google Home for more seamless IoT ("Ok Google, start my pushup routine!").
+
 • Add goal setting and facial recognition for different household users with different goals.
 
 ### Questions?
