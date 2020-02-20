@@ -1,4 +1,6 @@
 # Fitness Buddy (FitBud)
+![Main Image] (https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_thumbnail_photos/000/942/546/datas/medium.png)
+
 This repository was created for the MakeUofT hackathon on February 15-16, 2020. 
 
 ### Team
