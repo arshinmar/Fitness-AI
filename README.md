@@ -76,3 +76,5 @@ Run the run_webcam.py file, ideally with a haptic motor connected to the compute
 ### Questions?
 
 Contact Arsh Kadakia or Sepehr Hosseini (collaborators on this repository) for further details.
+
+(note: to run, first remove files from named folders)
